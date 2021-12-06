@@ -8,6 +8,17 @@ const mongoose = require("mongoose");
 // body parser
 app.use(express.json());
 
+// CORS
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, PATCH, DELETE"
+  );
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
+});
+
 // importing routes
 const clubsRoutes = require("./routes/clubs");
 app.use(clubsRoutes);
