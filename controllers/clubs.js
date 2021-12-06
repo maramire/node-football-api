@@ -1,12 +1,12 @@
 const Club = require("../models/club");
 
 exports.getClubs = async (req, res) => {
-  const country = req.query?.country;
+  const leagueId = req.query?.leagueId;
   let clubs;
-  if (!country) {
+  if (!leagueId) {
     clubs = await Club.find();
   } else {
-    clubs = await Club.find({ pais_club: country });
+    clubs = await Club.find({ league_id: leagueId });
   }
 
   res.send(clubs);
