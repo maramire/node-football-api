@@ -1,4 +1,5 @@
 const Player = require("../models/player");
+const Club = require("../models/club");
 
 // function that retrives players depending params
 // params: (optional) teamId
@@ -11,7 +12,11 @@ exports.getPlayers = async (req, res) => {
 exports.getPlayer = async (req, res) => {
   const playerId = req.params?.playerId;
   const player = await Player.findById(playerId);
-  res.send(player);
+  const club = await Club.findOne({ club_id: player.team_code_id });
+  res.send({
+    ...player._doc,
+    club,
+  });
 };
 
 // function that update player
