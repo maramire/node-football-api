@@ -1,13 +1,10 @@
 const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
 const ClubSchema = new mongoose.Schema({
-  club_id: String,
-  club_shortname: String,
-  league_id: Number,
-  pais: Number,
-  pais_club: String,
+  name: String,
+  code: Number,
 });
 
 const Club = mongoose.model("Club", ClubSchema, "clubs");
-
 module.exports = Club;

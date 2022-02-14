@@ -1,21 +1,25 @@
 const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
-const PlayerSchema = new mongoose.Schema({
-  player_code: Number,
-  player_name: String,
-  player_nation: String,
-  player_position: String,
-  player_int_caps: Number,
-  player_int_goals: Number,
-  player_birthday: Date,
-  player_joined_date: Date,
-  team_rep: Number,
-  player_cur: Number,
-  player_rep: Number,
-  team_code_id: Number,
+const PlayerSchema = new mongoose.Schema(
+  {
+    name: String,
+    code: Number,
+    position: String,
+    club_code: Number,
+  },
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  }
+);
+
+PlayerSchema.virtual("club", {
+  ref: "Club",
+  localField: "club_code",
+  foreignField: "code",
+  justOne: true,
 });
 
-// thir argument is collection name
 const Player = mongoose.model("Player", PlayerSchema, "players");
-
 module.exports = Player;
