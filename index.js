@@ -24,6 +24,8 @@ const clubsRoutes = require("./routes/clubs");
 app.use(clubsRoutes);
 const playersRoutes = require("./routes/players");
 app.use(playersRoutes);
+const seasonsRoutes = require("./routes/seasons");
+app.use(seasonsRoutes);
 
 // root route
 app.get("/", (req, res) => {
