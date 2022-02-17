@@ -2,8 +2,14 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const port = 3000;
-
+const passport = require("passport");
+const path = require("path");
 const mongoose = require("mongoose");
+
+// Pass the global passport object into the configuration function
+require("./config/passport")(passport);
+// This will initialize the passport object on every request
+app.use(passport.initialize());
 
 // body parser
 app.use(express.json());
@@ -26,6 +32,8 @@ const playersRoutes = require("./routes/players");
 app.use(playersRoutes);
 const seasonsRoutes = require("./routes/seasons");
 app.use(seasonsRoutes);
+const usersRoutes = require("./routes/users");
+app.use(usersRoutes);
 
 // root route
 app.get("/", (req, res) => {
