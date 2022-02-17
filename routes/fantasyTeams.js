@@ -16,4 +16,10 @@ router.put(
   fantasyTeamsController.editFantasyTeam
 );
 
+router.post(
+  "/fantasyTeams/:fantasyTeamId/fantasyTeamPlayers",
+  passport.authenticate("jwt", { session: false }),
+  fantasyTeamsController.createFantasyTeamPlayer
+);
+
 module.exports = router;

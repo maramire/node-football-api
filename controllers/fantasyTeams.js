@@ -1,4 +1,6 @@
 const FantasyTeam = require("../models/fantasyTeam");
+const FantasyTeamPlayer = require("../models/fantasyTeamPlayer");
+const Player = require("../models/player");
 
 exports.createFantasyTeam = async (req, res) => {
   const userAlreadyHasTeam = await FantasyTeam.findOne({ user: req.user._id });
@@ -44,5 +46,23 @@ exports.editFantasyTeam = async (req, res) => {
     res.json({ success: true });
   } catch (err) {
     res.json({ success: false });
+  }
+};
+
+exports.createFantasyTeamPlayer = async (req, res) => {
+  const playerAlreadyInMatchday = await FantasyTeamPlayer.findOne({
+    player: req.body.player,
+    matchday: req.body.matchday,
+  });
+  if (playerAlreadyInMatchday)
+    return res.json({ success: false, msg: "Player already in matchday." });
+
+  const newFantasyTeamPlayer = new FantasyTeamPlayer(req.body);
+  try {
+    newFantasyTeamPlayer.save().then((fantasyTeamPlayer) => {
+      res.json({ success: true, fantasyTeamPlayer });
+    });
+  } catch (err) {
+    res.json({ success: false, msg: err });
   }
 };
