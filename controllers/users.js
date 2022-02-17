@@ -56,3 +56,23 @@ exports.handleRegister = async (req, res) => {
     res.json({ success: false, msg: err });
   }
 };
+
+exports.editUser = async (req, res) => {
+  const userPayload = req.body;
+  try {
+    const user = await User.findOneAndUpdate(
+      { _id: req.params.userId },
+      userPayload,
+      {
+        new: true,
+      }
+    );
+    res.send({
+      message: "User updated correctly.",
+      user: user,
+    });
+    res.json({ success: true });
+  } catch (err) {
+    res.json({ success: false });
+  }
+};
