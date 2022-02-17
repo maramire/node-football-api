@@ -7,6 +7,7 @@ const PlayerSchema = new mongoose.Schema(
     code: Number,
     position: String,
     club_code: Number,
+    value: Number,
   },
   {
     toJSON: { virtuals: true },
