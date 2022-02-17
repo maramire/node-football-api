@@ -36,6 +36,8 @@ const usersRoutes = require("./routes/users");
 app.use(usersRoutes);
 const fantasyTeamsRoutes = require("./routes/fantasyTeams");
 app.use(fantasyTeamsRoutes);
+const matchdaysRoutes = require("./routes/matchdays");
+app.use(matchdaysRoutes);
 
 // root route
 app.get("/", (req, res) => {
