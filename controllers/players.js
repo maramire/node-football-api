@@ -1,5 +1,6 @@
 const Player = require("../models/player");
 const Club = require("../models/club");
+const PlayerMatchStatistic = require("../models/playerMatchStatistic");
 
 exports.getPlayers = async (req, res) => {
   players = await Player.find();
@@ -30,4 +31,22 @@ exports.updatePlayer = async (req, res) => {
       player: player,
     });
   }
+};
+
+exports.updateMatchStatistics = async (req, res) => {
+  const playerId = req.params?.playerId;
+  const matchId = req.query.matchId;
+  const statistic = await PlayerMatchStatistic.findOneAndUpdate(
+    { player: playerId, match: matchId },
+    req.body,
+    {
+      upsert: true,
+      new: true,
+      setDefaultsOnInsert: false,
+    }
+  );
+  res.send({
+    message: "Statistic updated correctly.",
+    statistic,
+  });
 };
