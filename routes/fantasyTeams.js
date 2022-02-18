@@ -22,4 +22,10 @@ router.post(
   fantasyTeamsController.createFantasyTeamPlayer
 );
 
+router.get(
+  "/fantasyTeams/:fantasyTeamId/fantasyTeamPlayers",
+  passport.authenticate("jwt", { session: false }),
+  fantasyTeamsController.getFantasyTeamPlayers
+);
+
 module.exports = router;
