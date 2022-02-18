@@ -57,7 +57,10 @@ exports.createFantasyTeamPlayer = async (req, res) => {
   if (playerAlreadyInMatchday)
     return res.json({ success: false, msg: "Player already in matchday." });
 
-  const newFantasyTeamPlayer = new FantasyTeamPlayer(req.body);
+  const newFantasyTeamPlayer = new FantasyTeamPlayer({
+    ...req.body,
+    fantasyTeam: req.params.fantasyTeamId,
+  });
   try {
     newFantasyTeamPlayer.save().then((fantasyTeamPlayer) => {
       res.json({ success: true, fantasyTeamPlayer });
