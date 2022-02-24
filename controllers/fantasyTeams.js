@@ -78,7 +78,16 @@ exports.getFantasyTeamPlayers = async (req, res) => {
       fantasyTeam: fantasyTeamId,
       matchday,
     },
-    "player"
+    "isStarter player"
   ).populate("player");
   res.send(players);
+};
+
+exports.getFantasyTeam = async (req, res) => {
+  try {
+    const fantasyTeam = await FantasyTeam.findOne({ user: req.user._id });
+    res.json(fantasyTeam);
+  } catch (err) {
+    res.json({ success: false });
+  }
 };

@@ -28,4 +28,10 @@ router.get(
   fantasyTeamsController.getFantasyTeamPlayers
 );
 
+router.get(
+  "/fantasyTeams",
+  passport.authenticate("jwt", { session: false }),
+  fantasyTeamsController.getFantasyTeam
+);
+
 module.exports = router;

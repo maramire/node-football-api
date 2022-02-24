@@ -1,5 +1,6 @@
 const utils = require("../utils/utils");
 const User = require("../models/user");
+const FantasyTeam = require("../models/fantasyTeam");
 
 exports.handleLogin = async (req, res) => {
   const password = req.body.password;

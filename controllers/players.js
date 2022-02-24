@@ -1,10 +1,19 @@
 const Player = require("../models/player");
 const Club = require("../models/club");
 const PlayerMatchStatistic = require("../models/playerMatchStatistic");
+require("dotenv").config();
 
 exports.getPlayers = async (req, res) => {
+  let players;
+  if (req.query?.position) {
+    players = await Player.find({
+      position: req.query.position,
+      club_code: { $in: process.env.CLUBS.split(",") },
+    }).populate("club");
+    return res.send(players);
+  }
   players = await Player.find();
-  res.send(players);
+  return res.send(players);
 };
 
 exports.getPlayer = async (req, res) => {
