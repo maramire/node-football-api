@@ -7,7 +7,6 @@ const router = express.Router();
 
 router.post('/login', usersController.handleLogin);
 router.post('/signup', usersController.handleRegister);
-
 router.put(
   '/users/:userId',
   passport.authenticate('jwt', { session: false }),
