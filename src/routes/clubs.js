@@ -1,16 +1,10 @@
 import express from 'express';
-// controllers
-import * as clubsController from '../controllers/clubs.js';
+import ClubsController from '../controllers/clubs.js';
 
 const router = express.Router();
 
-// GET all clubs
-router.get('/clubs', clubsController.getClubs);
-
-// GET club
-router.get('/clubs/:clubId', clubsController.getClub);
-
-// GET club players
-router.get('/clubs/:clubId/players', clubsController.getClubPlayers);
+router.get('/clubs', ClubsController.getClubs);
+router.get('/clubs/:clubId', ClubsController.getClub);
+router.get('/clubs/:clubId/players', ClubsController.getClubPlayers);
 
 export default router;
